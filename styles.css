@@ -1,0 +1,696 @@
+this is what I have for my css how can I fix 
+
+/* Simple reset to remove default margins/padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Color variables based on adventist.org */
+:root {
+    --adventist-blue: #306bac;
+    --adventist-dark-blue: #141b41;
+    --adventist-gold: #918ef4;
+    --light-gray: #98b9f2;
+    --text-color: #141b41;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    /* Remove the grid from the body */
+}
+
+/* --- THE CREATION GRID --- */
+/* This is the fixed, full-page 7-column grid that acts as our design system */
+.creation-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* The 7 equal columns */
+    pointer-events: none; /* Allows clicks to pass through to the content below */
+    z-index: 100; /* Places it on top of most content */
+}
+
+/* Styles for the first 6 columns (The work week) */
+.grid-column-1-6 {
+    grid-column: 1 / 7; /* Spans columns 1 to 6 */
+    /* We can add a subtle pattern or texture here later if desired */
+    /* For now, it's transparent */
+}
+
+/* Styles for the 7th column (The Sabbath column) */
+.sabbath-column {
+    grid-column: 7;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: var(--adventist-dark-blue);
+    border-left: 3px solid var(--adventist-gold);
+    padding-top: 2rem;
+  }
+
+  .sabbath-column__overlay {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+  }
+
+  .sabbath-column__overlay svg {
+    width: 70%;
+    height: auto;
+    max-width: 180px;
+    max-height: 160px;
+  }
+
+@media (min-width: 481px) and (max-width: 768px) {
+        .sabbath-column {
+            background: var(--adventist-dark-blue);
+            border-left: 2px solid var(--adventist-gold);
+        }
+        
+        .sabbath-column__overlay svg {
+            width: 75%;
+            height: 75%;
+        }
+    }
+
+/* --- MAIN CONTENT CONTAINER --- */
+/* This container holds all our actual website content and uses the same grid for alignment */
+.content-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    min-height: 100vh;
+    position: relative; /* Ensures content sits above the grid in the stacking order */
+    z-index: 1; /* Puts the content below the fixed grid but above the body */
+}
+
+/* Make header, nav, main, and footer span the first 6 columns of the CONTENT grid */
+header, nav, main, footer {
+    grid-column: 1 / 7; /* Content only goes in the first 6 columns */
+    padding: 2rem;
+}
+
+/* Header styling inspired by adventist.org */
+header {
+    background: linear-gradient(135deg, var(--adventist-dark-blue), var(--adventist-blue));
+    color: var(--white);
+    text-align: center;
+    padding: 1.5rem 2rem;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+header p {
+    font-style: italic;
+    color: var(--adventist-gold);
+}
+
+/* Navigation styling */
+nav {
+    background-color: var(--adventist-dark-blue);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 2rem;
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    pointer-events: auto; /* Re-enable clicks for links inside the nav */
+}
+
+nav a:hover {
+    color: var(--adventist-gold);
+    background-color: rgba(145, 142, 244, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Main content area */
+main {
+    background-color: var(--light-gray);
+    padding: 3rem 2rem;
+}
+
+/* Section styling */
+section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(20, 27, 65, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(20, 27, 65, 0.15);
+}
+
+/* Section headings */
+h2 {
+    color: var(--adventist-dark-blue);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--adventist-gold);
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+/* List styling */
+ul {
+    list-style-type: none;
+    margin-left: 1rem;
+}
+
+li {
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+li:before {
+    content: "•";
+    color: var(--adventist-blue);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Link styling */
+a {
+    color: var(--adventist-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--adventist-gold);
+    text-decoration: underline;
+}
+
+/* Footer styling */
+footer {
+    background-color: var(--adventist-dark-blue);
+    color: var(--white);
+    text-align: center;
+    margin-top: auto;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+    border-top: 3px solid var(--adventist-gold);
+}
+
+/* --- About Page Styles --- */
+.pastor-profile {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.pastor-photo {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+blockquote {
+    font-style: italic;
+    color: var(--adventist-dark-blue);
+    border-left: 4px solid var(--adventist-gold);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+}
+
+blockquote footer {
+    font-style: normal;
+    font-weight: bold;
+    color: var(--adventist-blue);
+    margin-top: 0.5rem;
+}
+
+/* --- Ministries Page Styles --- */
+.ministries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    gap: 1rem;
+    padding: 2rem 0;
+}
+
+.ministry-card {
+    position: relative;
+    height: 400px;
+    width: 50px;
+    background-color: var(--adventist-blue);
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 8px rgba(20, 27, 65, 0.2);
+}
+
+.ministry-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(20, 27, 65, 0.3);
+}
+
+.ministry-card.expanded {
+    width: 400px;
+    grid-column: span 2;
+}
+
+.ministry-card__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    background-color: var(--adventist-blue);
+    z-index: 1;
+}
+
+.ministry-card:hover .ministry-card__background {
+    opacity: 0.4;
+}
+
+.ministry-card.expanded .ministry-card__background {
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.ministry-card__compressed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(48, 107, 172, 0.8);
+    transition: opacity 0.4s ease;
+    z-index: 2;
+}
+
+.ministry-card.expanded .ministry-card__compressed {
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ministry-card__title-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    transform: rotate(180deg);
+    white-space: nowrap;
+}
+
+.ministry-card__expanded {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    overflow-y: auto;
+    z-index: 3;
+}
+
+.ministry-card.expanded .ministry-card__expanded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.ministry-card__title {
+    color: var(--adventist-dark-blue);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.ministry-card__content {
+    color: var(--text-color);
+    line-height: 1.6;
+    max-width: 100%;
+}
+
+.ministry-card__content p {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.ministry-card__content ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+.ministry-card__content li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.ministry-card__content li::before {
+    content: "•";
+    color: var(--adventist-gold);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+        /* Enhanced mobile Sabbath column styling */
+        .creation-grid {
+            display: grid;
+            grid-template-columns: 1fr 80px;
+        }
+        
+        .sabbath-column {
+            background: var(--adventist-dark-blue);
+            border-left: 2px solid var(--adventist-gold);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 1rem;
+        }
+
+        .sabbath-column__overlay svg {
+            width: 60%;
+            height: auto;
+            max-width: 50px;
+            max-height: 45px;
+        }
+        
+        /* Let content span the full width on mobile */
+        .content-container, header, nav, main, footer {
+            grid-column: 1 / -1; /* Spans all available columns */
+        }
+    
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .pastor-profile {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .pastor-photo {
+        margin: 0 auto;
+    }
+    
+    .ministries-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .ministry-card {
+        min-height: auto;
+    }
+    
+    .ministry-card.expanded {
+        grid-column: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* --- Vertical Title Ministries Layout --- */
+.ministries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+    align-items: start;
+    padding: 3rem;
+    max-width: 100%;
+    position: relative;
+    overflow: visible;
+}
+
+.ministry-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 0;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 3px solid var(--adventist-blue);
+    width: 70px; /* Thinner compressed cards */
+    height: 320px; /* Shorter compressed height */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.ministry-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(0, 73, 135, 0.25);
+}
+
+.ministry-card.expanded {
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+    max-height: 80vh;
+    border-radius: 25px;
+    z-index: 100;
+    box-shadow: 0 15px 40px rgba(20, 27, 65, 0.4);
+    max-width: calc(100% - 2rem);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Vertical Title Container */
+.card-title-vertical {
+    writing-mode: vertical-rl; /* Bottom-up vertical text */
+    text-orientation: mixed;
+    transform: rotate(180deg); /* Flips to read bottom-up */
+    padding: 2rem 0.8rem;
+    background: var(--adventist-blue);
+    color: white;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.ministry-card.expanded .card-title-vertical {
+    writing-mode: horizontal-tb; /* Back to horizontal when expanded */
+    transform: none;
+    padding: 1.5rem 2rem;
+    min-height: auto;
+    width: 100%;
+    font-size: 1.6rem;
+}
+
+.card-content {
+    flex-grow: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s ease;
+    font-size: 0.9rem;
+}
+
+.ministry-card.expanded .card-content {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.card-summary {
+    color: var(--text-color);
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--adventist-gold);
+}
+
+.card-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.ministry-card.expanded .card-details {
+    max-height: 1000px;
+    opacity: 1;
+    padding-top: 1rem;
+}
+
+.card-details p {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.card-details ul {
+    margin: 0.5rem 0;
+    padding-left: 1.2rem;
+}
+
+.card-details li {
+    margin-bottom: 0.3rem;
+    color: var(--adventist-dark-blue);
+    font-size: 0.85rem;
+}
+
+.card-details strong {
+    color: var(--adventist-blue);
+}
+
+/* Ministry-specific colors */
+.ministry-card[data-ministry="media"] .card-title-vertical { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); }
+.ministry-card[data-ministry="pathfinders"] .card-title-vertical { background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); }
+.ministry-card[data-ministry="adventurers"] .card-title-vertical { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); }
+.ministry-card[data-ministry="youth"] .card-title-vertical { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); }
+.ministry-card[data-ministry="music"] .card-title-vertical { background: linear-gradient(135deg, #27ae60 0%, #229954 100%); }
+.ministry-card[data-ministry="health"] .card-title-vertical { background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); }
+.ministry-card[data-ministry="children"] .card-title-vertical { background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%); }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ministries-grid {
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+    }
+    
+    .ministry-card {
+        height: 280px;
+        width: 40px;
+    }
+    
+    .ministry-card.expanded {
+        width: 320px;
+        grid-column: span 1;
+    }
+    
+    .card-title-vertical {
+        font-size: 0.8rem;
+    }
+    
+    .ministry-card.expanded .card-title-vertical {
+        font-size: 1.3rem;
+        padding: 1rem 1.5rem;
+    }
+    
+    .card-content {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ministries-grid {
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .ministry-card {
+        height: 250px;
+        width: 35px;
+    }
+    
+    .ministry-card.expanded {
+        width: 280px;
+    }
+    
+    .ministry-card.expanded .card-title-vertical {
+        padding: 1rem;
+    }
+}
+
+/* Animation for card reveal */
+@keyframes cardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ministry-card {
+    animation: cardReveal 0.8s ease forwards;
+}
+
+/* Stagger the animation */
+.ministry-card:nth-child(1) { animation-delay: 0.1s; }
+.ministry-card:nth-child(2) { animation-delay: 0.2s; }
+.ministry-card:nth-child(3) { animation-delay: 0.3s; }
+.ministry-card:nth-child(4) { animation-delay: 0.4s; }
+.ministry-card:nth-child(5) { animation-delay: 0.5s; }
+.ministry-card:nth-child(6) { animation-delay: 0.6s; }
+.ministry-card:nth-child(7) { animation-delay: 0.7s; }
