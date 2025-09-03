@@ -221,6 +221,11 @@ nav a:hover {
 @media (min-width: 769px) {
     nav {
         display: flex !important;
+        background-color: var(--adventist-dark-blue);
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     
     .dropdown-menu-btn,
@@ -252,7 +257,7 @@ nav a:hover {
         display: none; /* Hide desktop nav on mobile - only for mobile view */
     }
     
-    /* Integrated dropdown menu button */
+    /* Integrated dropdown menu button - positioned to avoid header overlap */
     .dropdown-menu-btn {
         display: block;
         padding: 0.75rem 1.5rem;
@@ -263,10 +268,9 @@ nav a:hover {
         font-size: 1rem;
         font-weight: 600;
         cursor: pointer;
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
+        position: relative;
+        margin-left: auto;
+        margin-right: 0;
         z-index: 1001;
         transition: all 0.3s ease;
         -webkit-tap-highlight-color: transparent;
@@ -718,6 +722,16 @@ blockquote footer {
         text-align: center;
     }
     
+    /* Ensure desktop navigation is visible on all pages */
+    nav {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+    
     .pastor-profile {
         grid-template-columns: 1fr;
         text-align: center;
@@ -730,14 +744,34 @@ blockquote footer {
     .ministries-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
+        padding: 1rem;
     }
     
     .ministry-card {
         min-height: auto;
+        width: 100%;
+        height: auto;
+        min-height: 80px;
+        margin-bottom: 1rem;
+    }
+    
+    .ministry-card__title-vertical {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+    
+    .ministry-card__compressed {
+        opacity: 1;
+        position: relative;
+        pointer-events: auto;
     }
     
     .ministry-card.expanded {
         grid-column: 1;
+        width: 100%;
+        max-width: none;
     }
 }
 
@@ -796,6 +830,72 @@ blockquote footer {
     max-width: calc(100% - 2rem);
     position: relative;
     overflow: hidden;
+}
+
+/* Mobile responsive ministry cards */
+@media (max-width: 768px) {
+    .ministries-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+    
+    .ministry-card {
+        width: 100%;
+        height: auto;
+        min-height: 60px;
+        max-height: none;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        border: 2px solid var(--adventist-blue);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .ministry-card__title-vertical {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 1.1rem;
+        padding: 0.8rem;
+        color: var(--adventist-dark-blue);
+        text-align: left;
+    }
+    
+    .ministry-card__compressed {
+        opacity: 1;
+        position: relative;
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+    }
+    
+    .ministry-card__expanded {
+        position: relative;
+        opacity: 1;
+        transform: none;
+        padding: 1rem;
+        background: var(--white);
+        border-top: 1px solid #eee;
+        border-radius: 0 0 12px 12px;
+    }
+    
+    .ministry-card.expanded {
+        width: 100%;
+        max-width: none;
+        min-height: auto;
+        max-height: none;
+        border-radius: 12px;
+    }
+    
+    .ministry-card__title {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .ministry-card__content p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
 }
 
 /* Vertical Title Container */
