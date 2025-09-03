@@ -88,10 +88,39 @@ body {
     max-height: 160px;
   }
 
-/* Mobile responsive grid */
+/* Mobile responsive creation grid - 7 column layout */
 @media (max-width: 768px) {
     .creation-grid {
-        display: none; /* Hide creation grid on mobile for better performance */
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .creation-grid .grid-item {
+        min-height: 250px;
+    }
+    
+    /* 7th column as full-width separate section */
+    .creation-grid .grid-item:nth-child(7) {
+        grid-column: 1 / -1;
+        min-height: 100vh;
+        background: linear-gradient(135deg, var(--adventist-dark-blue), var(--adventist-gold));
+        color: var(--white);
+        border-radius: 15px;
+        margin-top: 2rem;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    /* Add whitespace separator */
+    .creation-grid .grid-item:nth-child(7)::before {
+        content: '';
+        height: 2rem;
+        display: block;
     }
     
     .content-container {
@@ -198,6 +227,7 @@ nav a:hover {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
     }
     
     header h1 {
@@ -213,74 +243,69 @@ nav a:hover {
         display: none; /* Hide desktop nav on mobile */
     }
     
-   .hamburger-menu {
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-        padding: 0.5rem;
-        z-index: 1001;
+    /* Simple dropdown menu button */
+    .dropdown-menu-btn {
+        display: block;
+        padding: 0.5rem 1rem;
+        background-color: var(--adventist-gold);
+        color: var(--adventist-dark-blue);
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 600;
         cursor: pointer;
-        background-color: rgba(0, 0, 0, 0.9);
-        border-radius: 8px;
-        border: 2px solid var(--adventist-gold);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         position: absolute;
         right: 15px;
-        top: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
     }
     
-    .hamburger-menu span {
+    .dropdown-menu-btn:hover {
+        background-color: #c4a400;
+    }
+    
+    .dropdown-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 15px;
+        background-color: var(--adventist-dark-blue);
+        border: 2px solid var(--adventist-gold);
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        min-width: 200px;
+    }
+    
+    .dropdown-nav.active {
         display: block;
-        width: 22px;
-        height: 3px;
-        background-color: white;
-        transition: all 0.3s ease;
-        border-radius: 2px;
+    }
+    
+    .dropdown-nav a {
+        display: block;
+        color: var(--white);
+        text-decoration: none;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background-color 0.3s ease;
+    }
+    
+    .dropdown-nav a:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-nav a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Hide old hamburger menu */
+    .hamburger-menu {
+        display: none;
     }
     
     .mobile-nav {
-        display: none; /* Hidden by default, shown via JS */
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: var(--adventist-dark-blue);
-        z-index: 999;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 1.5rem;
-    }
-    
-    .mobile-nav a {
-        color: var(--white);
-        text-decoration: none;
-        font-size: 1.5rem;
-        text-transform: uppercase;
-        font-weight: 600;
-        padding: 1rem;
-        transition: color 0.3s ease;
-    }
-    
-    .mobile-nav a:hover {
-        color: var(--adventist-gold);
-    }
-    
-    .mobile-nav.active {
-        display: flex; /* Show when active */
-    }
-    
-    .hamburger-menu.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-    
-    .hamburger-menu.active span:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .hamburger-menu.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
+        display: none;
     }
 }
 
