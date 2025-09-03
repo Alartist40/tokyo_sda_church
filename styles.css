@@ -354,7 +354,7 @@ nav a:hover {
 
 /* Main content area */
 main {
-    background-color: var(--light-gray);
+    background-color: var(--white);
     padding: 3rem 2rem;
 }
 
@@ -387,7 +387,7 @@ section:hover {
 }
 
 .social-box {
-    background-color: var(--light-gray);
+    background-color: var(--white);
     padding: 1.5rem;
     border-radius: 8px;
     margin-top: 1rem;
