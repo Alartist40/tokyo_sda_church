@@ -25,30 +25,10 @@
         <header>
             <h1>Tokyo International Seventh-day Adventist Church</h1>
             <img src="images/logo/header/adventist-en-centered--white.svg" alt="Tokyo International Seventh-day Adventist Church" class="church-logo">
-            <!-- Mobile Dropdown Menu Button -->
-            <button class="dropdown-menu-btn" onclick="toggleDropdown()">Menu</button>
-            
-            <!-- Mobile Dropdown Navigation -->
-            <nav class="dropdown-nav" id="dropdown-nav">
-                <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
-                <a href="ministries.html">Ministries</a>
-                <a href="sermon.html">Sermons</a>
-                <a href="events.html">Events</a>
-                <a href="resources.html">Resources</a>
-                <a href="visit.html">Visit Us</a>
-            </nav>
+
         </header>
         <!-- Desktop Navigation -->
         <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="ministries.html">Ministries</a>
-            <a href="sermon.html">Sermons</a>
-            <a href="events.html">Events</a>
-            <a href="resources.html">Resources</a>
-            <a href="visit.html">Visit Us</a>
-        </nav>
             <a href="index.html">Home</a>
             <a href="about.html">About Us</a>
             <a href="ministries.html">Ministries</a>
@@ -84,38 +64,6 @@
         </footer>
     </div>
 
-    <script>
-        // Dropdown menu functionality
-        function toggleDropdown() {
-            const dropdownNav = document.getElementById('dropdown-nav');
-            dropdownNav.classList.toggle('active');
-            
-            // Prevent body scrolling when dropdown is open
-            if (dropdownNav.classList.contains('active')) {
-                document.body.classList.add('no-scroll', 'menu-open');
-            } else {
-                document.body.classList.remove('no-scroll', 'menu-open');
-            }
-        }
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const dropdownNav = document.getElementById('dropdown-nav');
-            const dropdownBtn = document.querySelector('.dropdown-menu-btn');
-            
-            if (!dropdownNav.contains(event.target) && !dropdownBtn.contains(event.target)) {
-                dropdownNav.classList.remove('active');
-                document.body.classList.remove('no-scroll', 'menu-open');
-            }
-        });
-        
-        // Close dropdown when clicking on a link
-        document.getElementById('dropdown-nav').addEventListener('click', function(e) {
-            if (e.target.tagName === 'A') {
-                document.getElementById('dropdown-nav').classList.remove('active');
-                document.body.classList.remove('no-scroll', 'menu-open');
-            }
-        });
-    </script>
+
 </body>
 </html>

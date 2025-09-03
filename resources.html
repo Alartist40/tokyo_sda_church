@@ -24,16 +24,7 @@
         <header>
             <h1>Tokyo International Seventh-day Adventist Church</h1>
             <img src="images/logo/header/adventist-en-centered--white.svg" alt="Tokyo International Seventh-day Adventist Church" class="church-logo">
-            <button class="dropdown-menu-btn" onclick="toggleDropdown()">Menu</button>
-            <div class="dropdown-nav" id="dropdownNav">
-                <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
-                <a href="ministries.html">Ministries</a>
-                <a href="sermon.html">Sermons</a>
-                <a href="events.html">Events</a>
-                <a href="resources.html">Resources</a>
-                <a href="visit.html">Visit Us</a>
-            </div>
+
         </header>
 
         <nav>
@@ -74,37 +65,7 @@
     </div>
 
     <script>
-        // Dropdown menu functionality
-        function toggleDropdown() {
-            const dropdown = document.getElementById('dropdownNav');
-            dropdown.classList.toggle('active');
-            
-            // Prevent body scrolling when menu is open
-            if (dropdown.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        }
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('dropdownNav');
-            const button = document.querySelector('.dropdown-menu-btn');
-            
-            if (!dropdown.contains(event.target) && !button.contains(event.target)) {
-                dropdown.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Close dropdown when clicking a link
-        document.querySelectorAll('.dropdown-nav a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.getElementById('dropdownNav').classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
 
         // Google Drive Integration
         const DRIVE_FOLDER_ID = '1cdIImsxn_sQeLUbBfgAnFWMhJL4HVsL';

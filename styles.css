@@ -24,6 +24,7 @@ body {
     font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
+    background-color: #ffffff; /* White background */
     /* Remove the grid from the body */
     overflow-x: hidden;
 }
@@ -100,6 +101,7 @@ body {
         grid-template-columns: repeat(7, 1fr);
         pointer-events: none;
         z-index: 100;
+        background-color: transparent; /* Ensure transparent */
     }
     
     .grid-column-1-6 {
@@ -122,6 +124,7 @@ body {
         min-height: 100vh;
         position: relative;
         z-index: 1;
+        background-color: transparent; /* Ensure transparent */
     }
     
     header, nav, main, footer {
