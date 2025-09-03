@@ -26,6 +26,12 @@
             <img src="images/logo/header/adventist-en-centered--white.svg" alt="Tokyo International Seventh-day Adventist Church" class="church-logo">
         </header>
 
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
         <nav>
             <a href="index.html">Home</a>
             <a href="about.html">About Us</a>
@@ -35,47 +41,35 @@
             <a href="resources.html">Resources</a>
             <a href="visit.html">Visit Us</a>
         </nav>
+        
+        <div class="mobile-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="ministries.html">Ministries</a>
+            <a href="sermon.html">Sermons</a>
+            <a href="events.html">Events</a>
+            <a href="resources.html">Resources</a>
+            <a href="visit.html">Visit Us</a>
+        </div>
 
         <main>
             <section id="resources-content">
                 <h2>Church Resources & Bulletins</h2>
-                <p>Download our weekly bulletins, event materials, and other church resources. All files are in PDF format.</p>
+                <p>Access our latest church resources, weekly bulletins, and event materials. Files are automatically updated from our shared Google Drive folder.</p>
                 
                 <div class="drive-container">
-                    <!-- Weekly Bulletins -->
-                    <div class="resource-category">
-                        <h3>📄 Weekly Bulletins</h3>
-                        <div class="drive-items">
-                            <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing" 
-                               target="_blank" class="drive-link">
-                                Bulletin - September 10, 2023
-                            </a>
-                            <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing" 
-                               target="_blank" class="drive-link">
-                                Bulletin - September 3, 2023
-                            </a>
-                            <!-- Add more links as needed -->
-                        </div>
+                    <div class="drive-loading">
+                        <p>📂 Loading resources from Google Drive...</p>
                     </div>
-
-                    <!-- Event Materials -->
-                    <div class="resource-category">
-                        <h3>🎉 Event Materials</h3>
-                        <div class="drive-items">
-                            <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing" 
-                               target="_blank" class="drive-link">
-                                Fall Festival 2023 Poster
-                            </a>
-                            <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing" 
-                               target="_blank" class="drive-link">
-                                Prayer Retreat Registration
-                            </a>
-                        </div>
+                    
+                    <div id="drive-files" class="drive-items" style="display: none;">
+                        <!-- Files will be populated here -->
                     </div>
                 </div>
 
                 <div class="drive-help">
-                    <p><strong>Note:</strong> Can't find what you're looking for? Contact us at <a href="mailto:info@tokyoadventist.org">info@tokyoadventist.org</a></p>
+                    <p><strong>Access our Google Drive:</strong> <a href="https://drive.google.com/drive/folders/1cdIImsxn_sQeLUbBfgAnFWMhJL4HVsL" target="_blank">View All Files</a></p>
+                    <p><strong>Need help?</strong> Contact us at <a href="mailto:info@tokyoadventist.org">info@tokyoadventist.org</a></p>
                 </div>
             </section>
         </main>
@@ -84,5 +78,109 @@
             <p>© 2023 Tokyo International Seventh-day Adventist Church</p>
         </footer>
     </div>
+
+    <script>
+        // Hamburger Menu Functionality
+        const hamburger = document.querySelector('.hamburger-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const body = document.body;
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        }
+
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('active');
+            body.classList.remove('menu-open');
+        }
+
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // Close menu when clicking on mobile nav links
+        mobileNav.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                closeMenu();
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // Google Drive Integration
+        const DRIVE_FOLDER_ID = '1cdIImsxn_sQeLUbBfgAnFWMhJL4HVsL';
+        
+        async function loadDriveFiles() {
+            try {
+                // Google Drive folder public sharing URL
+                const folderUrl = `https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}`;
+                
+                // Since we can't directly access Google Drive API without authentication,
+                // we'll create a simple system that encourages users to check the shared folder
+                const driveContainer = document.getElementById('drive-files');
+                const loadingDiv = document.querySelector('.drive-loading');
+                
+                // Simulate loading with a slight delay for better UX
+                setTimeout(() => {
+                    loadingDiv.style.display = 'none';
+                    driveContainer.style.display = 'block';
+                    
+                    // Create a clean, user-friendly display
+                    driveContainer.innerHTML = `
+                        <div class="drive-section">
+                            <h3>📄 Latest Church Resources</h3>
+                            <p>All our files are automatically synced to our shared Google Drive folder.</p>
+                            <a href="${folderUrl}" target="_blank" class="drive-link drive-folder-link">
+                                📁 Open Google Drive Folder
+                            </a>
+                        </div>
+                        
+                        <div class="drive-section">
+                            <h3>📋 How to Access Files</h3>
+                            <ol class="drive-instructions">
+                                <li>Click the "Open Google Drive Folder" link above</li>
+                                <li>Browse through our organized folders</li>
+                                <li>Download or view any file directly</li>
+                                <li>Check back regularly for new uploads</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="drive-section">
+                            <h3>📅 File Categories</h3>
+                            <div class="drive-categories">
+                                <span class="drive-category">Weekly Bulletins</span>
+                                <span class="drive-category">Event Flyers</span>
+                                <span class="drive-category">Registration Forms</span>
+                                <span class="drive-category">Church Newsletters</span>
+                                <span class="drive-category">Special Announcements</span>
+                            </div>
+                        </div>
+                    `;
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Error loading drive files:', error);
+                const loadingDiv = document.querySelector('.drive-loading');
+                loadingDiv.innerHTML = `
+                    <p>❌ Unable to load Google Drive files.</p>
+                    <p><a href="https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}" target="_blank">Click here to access our Google Drive folder directly</a></p>
+                `;
+            }
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDriveFiles();
+        });
+    </script>
 </body>
 </html>

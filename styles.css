@@ -195,6 +195,9 @@ nav a:hover {
 @media (max-width: 768px) {
     header {
         padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     
     header h1 {
@@ -207,20 +210,77 @@ nav a:hover {
     }
     
     nav {
+        display: none; /* Hide desktop nav on mobile */
+    }
+    
+   .hamburger-menu {
+        display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 3px;
         padding: 0.5rem;
+        z-index: 1001;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 8px;
+        border: 2px solid var(--adventist-gold);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        position: absolute;
+        right: 15px;
+        top: 15px;
     }
     
-    nav a {
-        font-size: 0.9rem;
-        padding: 0.75rem 1rem;
-        text-align: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    .hamburger-menu span {
+        display: block;
+        width: 22px;
+        height: 3px;
+        background-color: white;
+        transition: all 0.3s ease;
+        border-radius: 2px;
     }
     
-    nav a:last-child {
-        border-bottom: none;
+    .mobile-nav {
+        display: none; /* Hidden by default, shown via JS */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--adventist-dark-blue);
+        z-index: 999;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    
+    .mobile-nav a {
+        color: var(--white);
+        text-decoration: none;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        padding: 1rem;
+        transition: color 0.3s ease;
+    }
+    
+    .mobile-nav a:hover {
+        color: var(--adventist-gold);
+    }
+    
+    .mobile-nav.active {
+        display: flex; /* Show when active */
+    }
+    
+    .hamburger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger-menu.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
     }
 }
 
@@ -850,29 +910,21 @@ blockquote footer {
     
     /* Mobile-friendly title */
     .card-title-vertical {
-        writing-mode: horizontal-tb;
-        transform: none;
-        position: relative;
-        width: 100%;
-        min-height: auto;
-        padding: 1rem;
-        font-size: 1.1rem;
-        text-align: left;
-        border-radius: 12px 12px 0 0;
+        display: none; /* Remove blue title section on mobile */
     }
     
-    /* Spacious content */
+    /* Always expanded content */
     .card-content {
-        padding: 1.5rem;
+        padding: 1rem;
         opacity: 1;
         transform: none;
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     
     .card-summary {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        padding-bottom: 0.8rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
     }
     
     .card-details {
@@ -882,50 +934,50 @@ blockquote footer {
     }
     
     .card-details p {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin-bottom: 0.8rem;
+        font-size: 0.85rem;
+        line-height: 1.3;
+        margin-bottom: 0.5rem;
     }
     
     .card-details ul {
-        margin: 0.5rem 0;
-        padding-left: 1.5rem;
+        margin: 0.3rem 0;
+        padding-left: 1rem;
     }
     
     .card-details li {
-        font-size: 0.9rem;
-        margin-bottom: 0.4rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.2rem;
     }
     
     .card-icon {
-        font-size: 2rem;
-        margin-bottom: 0.8rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
     }
     
-    /* Remove fixed positioning and transforms */
+    /* Remove transforms and positioning */
     .ministry-card.expanded {
         position: relative;
         top: auto;
         left: auto;
         transform: none !important;
         z-index: auto;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
     
-    /* Better spacing */
+    /* Smaller spacing */
     main {
-        padding: 1rem;
+        padding: 0.5rem;
     }
     
     section {
-        padding: 1.5rem 1rem;
-        margin-bottom: 1.5rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
     }
     
     /* Clean typography */
-    h1 { font-size: 1.6rem; }
-    h2 { font-size: 1.4rem; }
-    h3 { font-size: 1.2rem; }
+    h1 { font-size: 1.4rem; }
+    h2 { font-size: 1.2rem; }
+    h3 { font-size: 1.1rem; }
 }
 
 @media (max-width: 480px) {
@@ -1185,9 +1237,67 @@ blockquote footer {
         border-radius: 12px;
     }
     
-    /* Creation grid hidden on mobile */
+    /* Creation grid - 7th grid full width */
     .creation-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin: 20px 0;
+    }
+    
+    .creation-grid .ministry-card {
+        min-height: 200px;
+        margin-bottom: 0;
+    }
+    
+    .creation-grid .ministry-card:nth-child(7) {
+        grid-column: 1 / -1;
+        margin: 25px 0 0 0;
+        min-height: auto;
+    }
+    
+    .creation-grid .ministry-card:nth-child(7) .ministry-card__expanded {
+        padding: 25px;
+        min-height: auto;
+    }
+    
+    .creation-grid .ministry-card:not(:nth-child(7)) .ministry-card__expanded {
+        padding: 15px;
+        min-height: 200px;
+    }
+    
+    .creation-grid .ministry-card:not(:nth-child(7)) .ministry-card__expanded h3 {
+        font-size: 1.1rem;
+    }
+    
+    .creation-grid .ministry-card:not(:nth-child(7)) .ministry-card__expanded p {
+        font-size: 0.9rem;
+    }
+    
+    /* Enhanced hamburger menu with contrast */
+    .hamburger-menu {
         display: none;
+        flex-direction: column;
+        gap: 3px;
+        padding: 0.5rem;
+        z-index: 1001;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 8px;
+        border: 2px solid var(--adventist-gold);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+    
+    .hamburger-menu span {
+        display: block;
+        width: 22px;
+        height: 3px;
+        background-color: white;
+        transition: all 0.3s ease;
+        border-radius: 2px;
     }
     
     /* Content container */
@@ -1225,7 +1335,50 @@ blockquote footer {
         padding: 0.7rem 1rem;
         font-size: 0.95rem;
     }
-}
+    
+    /* 7th grid - full width top-to-bottom */
+    .creation-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin: 15px 0;
+    }
+    
+    .creation-grid .ministry-card {
+        min-height: 160px;
+        margin-bottom: 0;
+    }
+    
+    .creation-grid .ministry-card:nth-child(7) {
+        grid-column: 1 / -1;
+        margin: 20px 0 0 0;
+        min-height: auto;
+    }
+    
+    .creation-grid .ministry-card:nth-child(7) .ministry-card__expanded {
+        padding: 20px;
+        min-height: auto;
+    }
+    
+    .creation-grid .ministry-card:not(:nth-child(7)) .ministry-card__expanded {
+        padding: 12px;
+        min-height: 160px;
+    }
+    
+    .creation-grid .ministry-card:not(:nth-child(7)) .ministry-card__expanded h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+    
+    .creation-grid .ministry-card:not(:nth-child(7)) .ministry-card__expanded p {
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+    }
+    
+    .creation-grid .ministry-card:not(:nth-child(7)) .ministry-card__expanded .button {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
 
 /* Landscape mode adjustments */
 @media (max-height: 500px) and (orientation: landscape) {
@@ -1249,6 +1402,13 @@ blockquote footer {
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
+}
+
+/* Prevent scrolling when mobile menu is open */
+body.no-scroll,
+body.menu-open {
+    overflow: hidden;
+    height: 100vh;
 }
 
 /* Focus styles for accessibility */

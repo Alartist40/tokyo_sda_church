@@ -26,6 +26,12 @@
             <h1>Tokyo International Seventh-day Adventist Church</h1>
             <img src="images/logo/header/adventist-en-centered--white.svg" alt="Tokyo International Seventh-day Adventist Church" class="church-logo">
         </header>
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
         <nav>
             <a href="index.html">Home</a>
             <a href="about.html">About Us</a>
@@ -35,6 +41,16 @@
             <a href="resources.html">Resources</a>
             <a href="visit.html">Visit Us</a>
         </nav>
+        
+        <div class="mobile-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="ministries.html">Ministries</a>
+            <a href="sermon.html">Sermons</a>
+            <a href="events.html">Events</a>
+            <a href="resources.html">Resources</a>
+            <a href="visit.html">Visit Us</a>
+        </div>
 
         <main>
             <section id="live-worship">
@@ -61,5 +77,43 @@
             <p>© 2023 Tokyo International Seventh-day Adventist Church</p>
         </footer>
     </div>
+
+    <script>
+        // Hamburger Menu Functionality
+        const hamburger = document.querySelector('.hamburger-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const body = document.body;
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        }
+
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('active');
+            body.classList.remove('menu-open');
+        }
+
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // Close menu when clicking on mobile nav links
+        mobileNav.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                closeMenu();
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+                closeMenu();
+            }
+        });
+    </script>
 </body>
 </html>

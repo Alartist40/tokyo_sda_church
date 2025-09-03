@@ -27,6 +27,12 @@
             <img src="images/logo/header/adventist-en-centered--white.svg" alt="Tokyo International Seventh-day Adventist Church" class="church-logo">
         </header>
 
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
         <nav>
             <a href="index.html">Home</a>
             <a href="about.html">About Us</a>
@@ -36,6 +42,16 @@
             <a href="resources.html">Resources</a>
             <a href="visit.html">Visit Us</a>
         </nav>
+        
+        <div class="mobile-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="ministries.html">Ministries</a>
+            <a href="sermon.html">Sermons</a>
+            <a href="events.html">Events</a>
+            <a href="resources.html">Resources</a>
+            <a href="visit.html">Visit Us</a>
+        </div>
 
         <main>
             <section id="ministries-overview">
@@ -150,59 +166,88 @@
     </div>
 
     <script>
-        // Clean mobile ministry card interaction
+        // Hamburger menu functionality
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        
+        hamburgerMenu.addEventListener('click', function() {
+            hamburgerMenu.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        });
+        
+        // Close mobile menu when clicking on a link
+        mobileNav.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                hamburgerMenu.classList.remove('active');
+                mobileNav.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburgerMenu.contains(e.target) && !mobileNav.contains(e.target)) {
+                hamburgerMenu.classList.remove('active');
+                mobileNav.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
+        });
+
+        // Ministry cards - simplified for mobile
         document.addEventListener('DOMContentLoaded', function() {
             const cards = document.querySelectorAll('.ministry-card');
-            let activeCard = null;
-
-            // Simple, clean interaction - no complex positioning
-            cards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    // Simple toggle - close others, open this one
-                    cards.forEach(otherCard => {
-                        if (otherCard !== this) {
-                            otherCard.classList.remove('expanded');
-                        }
+            
+            // On mobile, cards are always expanded via CSS
+            // On desktop, maintain the click interaction
+            function handleResize() {
+                const isMobile = window.innerWidth <= 768;
+                
+                if (isMobile) {
+                    // Make all cards expanded on mobile
+                    cards.forEach(card => {
+                        card.classList.add('expanded');
+                        // Remove click handlers for mobile
+                        card.style.pointerEvents = 'none';
+                    });
+                } else {
+                    // Restore desktop behavior
+                    cards.forEach(card => {
+                        card.classList.remove('expanded');
+                        card.style.pointerEvents = 'auto';
                     });
                     
-                    this.classList.toggle('expanded');
-                    activeCard = this.classList.contains('expanded') ? this : null;
-                    
-                    // Smooth scroll to this card if needed
-                    if (this.classList.contains('expanded')) {
-                        setTimeout(() => {
-                            this.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'nearest',
-                                inline: 'nearest'
-                            });
-                        }, 100);
-                    }
-                });
-            });
-
-            // Close card when clicking outside
+                    // Add click handlers for desktop
+                    cards.forEach(card => {
+                        card.addEventListener('click', function(e) {
+                            if (window.innerWidth > 768) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                
+                                cards.forEach(otherCard => {
+                                    if (otherCard !== this) {
+                                        otherCard.classList.remove('expanded');
+                                    }
+                                });
+                                
+                                this.classList.toggle('expanded');
+                            }
+                        });
+                    });
+                }
+            }
+            
+            // Initial setup
+            handleResize();
+            
+            // Handle window resize
+            window.addEventListener('resize', handleResize);
+            
+            // Close cards when clicking outside on desktop
             document.addEventListener('click', function(e) {
-                if (!e.target.closest('.ministry-card')) {
+                if (window.innerWidth > 768 && !e.target.closest('.ministry-card')) {
                     cards.forEach(card => card.classList.remove('expanded'));
-                    activeCard = null;
                 }
-            });
-
-            // Keyboard accessibility - ESC to close
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    cards.forEach(card => card.classList.remove('expanded'));
-                    activeCard = null;
-                }
-            });
-
-            // Prevent layout shifts on mobile
-            window.addEventListener('resize', function() {
-                // Let CSS handle responsiveness - no JS needed
             });
         });
     </script>
