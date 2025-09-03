@@ -835,21 +835,20 @@ blockquote footer {
     overflow: hidden;
 }
 
-/* Mobile responsive ministry cards */
+/* Mobile responsive ministry cards - Always expanded */
 @media (max-width: 768px) {
     .ministries-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2.5rem;
         padding: 1rem;
     }
     
     .ministry-card {
         width: 100%;
         height: auto;
-        min-height: 60px;
+        min-height: auto;
         max-height: none;
         border-radius: 12px;
-        margin-bottom: 1rem;
         border: 2px solid var(--adventist-blue);
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     }
@@ -857,26 +856,21 @@ blockquote footer {
     .ministry-card__title-vertical {
         writing-mode: horizontal-tb;
         transform: none;
-        font-size: 1.1rem;
-        padding: 0.8rem;
+        font-size: 1.3rem;
+        padding: 1rem;
         color: var(--adventist-dark-blue);
         text-align: left;
     }
     
     .ministry-card__compressed {
-        opacity: 1;
-        position: relative;
-        pointer-events: auto;
-        display: flex;
-        align-items: center;
-        padding: 0.5rem;
+        display: none;
     }
     
     .ministry-card__expanded {
         position: relative;
         opacity: 1;
         transform: none;
-        padding: 1rem;
+        padding: 1.5rem;
         background: var(--white);
         border-top: 1px solid #eee;
         border-radius: 0 0 12px 12px;
@@ -891,13 +885,18 @@ blockquote footer {
     }
     
     .ministry-card__title {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         margin-bottom: 1rem;
     }
     
     .ministry-card__content p {
         font-size: 1rem;
-        line-height: 1.5;
+        line-height: 1.6;
+    }
+    
+    /* More white space for 7th grid item */
+    .ministry-card:nth-child(7) {
+        margin-top: 2rem;
     }
 }
 
